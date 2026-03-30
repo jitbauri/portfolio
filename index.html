@@ -301,24 +301,30 @@
                 <div class="bg-[#0d1117] border border-slate-800 rounded-[2.5rem] overflow-hidden shadow-2xl relative p-10 md:p-16 text-center">
                     <h2 class="text-4xl md:text-5xl font-black text-white mb-6 italic tracking-tighter uppercase">Let's <span class="text-indigo-500 underline underline-offset-[12px] decoration-1 decoration-indigo-500/20">Connect</span></h2>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-                       <div class="flex flex-col items-center gap-3 p-6 rounded-2xl bg-slate-900/50 border border-white/5">
-                          <i data-lucide="mail" class="text-indigo-500 w-6 h-6"></i>
-                          <span class="text-[10px] font-mono text-slate-400 break-all">jitbauri.official@gmail.com</span>
-                       </div>
-                       <a href="https://github.com/jitbauri" target="_blank" class="flex flex-col items-center gap-3 p-6 rounded-2xl bg-slate-900/50 border border-white/5 hover:border-indigo-500/50 transition-all">
-                          <i data-lucide="github" class="text-indigo-500 w-6 h-6"></i>
-                          <span class="text-[10px] font-mono text-slate-400 tracking-widest">/jitbauri</span>
-                       </a>
-                       <a href="https://www.linkedin.com/in/jit-bauri-440332284/" target="_blank" class="flex flex-col items-center gap-3 p-6 rounded-2xl bg-slate-900/50 border border-white/5 hover:border-indigo-500/50 transition-all">
-                          <i data-lucide="linkedin" class="text-indigo-500 w-6 h-6"></i>
-                          <span class="text-[10px] font-mono text-slate-400 tracking-widest">/jit-bauri</span>
-                       </a>
-                       <a href="https://x.com/inc_jit" target="_blank" class="flex flex-col items-center gap-3 p-6 rounded-2xl bg-slate-900/50 border border-white/5 hover:border-indigo-500/50 transition-all">
-                          <i data-lucide="twitter" class="text-indigo-500 w-6 h-6"></i>
-                          <span class="text-[10px] font-mono text-slate-400 tracking-widest">@inc_jit</span>
-                       </a>
-                    </div>
+                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+    <div class="flex flex-col items-center gap-3 p-6 rounded-2xl bg-slate-900/50 border border-white/5">
+        <i data-lucide="mail" class="text-indigo-500 w-6 h-6"></i>
+        <span class="text-[10px] font-mono text-slate-400 break-all">jitbauri.official@gmail.com</span>
+    </div>
+
+    <a href="https://github.com/jitbauri" target="_blank" rel="noopener noreferrer"
+       class="flex flex-col items-center gap-3 p-6 rounded-2xl bg-slate-900/50 border border-white/5 hover:border-indigo-500/50 transition-all">
+        <i data-lucide="github" class="text-indigo-500 w-6 h-6"></i>
+        <span class="text-[10px] font-mono text-slate-400 tracking-widest">/jitbauri</span>
+    </a>
+
+    <a href="https://www.linkedin.com/in/jit-bauri-440332284/" target="_blank" rel="noopener noreferrer"
+       class="flex flex-col items-center gap-3 p-6 rounded-2xl bg-slate-900/50 border border-white/5 hover:border-indigo-500/50 transition-all">
+        <i data-lucide="linkedin" class="text-indigo-500 w-6 h-6"></i>
+        <span class="text-[10px] font-mono text-slate-400 tracking-widest">/jit-bauri</span>
+    </a>
+
+    <a href="https://x.com/inc_jit" target="_blank" rel="noopener noreferrer"
+       class="flex flex-col items-center gap-3 p-6 rounded-2xl bg-slate-900/50 border border-white/5 hover:border-indigo-500/50 transition-all">
+        <i data-lucide="twitter" class="text-indigo-500 w-6 h-6"></i>
+        <span class="text-[10px] font-mono text-slate-400 tracking-widest">@inc_jit</span>
+    </a>
+</div>
 
                      <div class="max-w-xl mx-auto" id="form-container">
                         <!-- REPLACE mqaebrjr WITH YOUR FORMSPREE ID AFTER CREATING FORM -->
@@ -349,47 +355,54 @@
     </footer>
 
      <script>
+document.addEventListener('DOMContentLoaded', () => {
+    if (window.lucide) {
         lucide.createIcons();
+    }
 
-        // Mouse Ambient Glow Logic
-        document.addEventListener('mousemove', e => {
-            document.documentElement.style.setProperty('--x', e.clientX + 'px');
-            document.documentElement.style.setProperty('--y', e.clientY + 'px');
+    // Mouse Ambient Glow Logic
+    document.addEventListener('mousemove', e => {
+        document.documentElement.style.setProperty('--x', e.clientX + 'px');
+        document.documentElement.style.setProperty('--y', e.clientY + 'px');
+    });
+
+    // Scroll Progress Bar Logic
+    window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        document.getElementById("progress-bar").style.width = scrolled + "%";
+    });
+
+    // Scroll Reveal Observer
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
         });
+    }, { threshold: 0.1 });
 
-        // Scroll Progress Bar Logic
-        window.addEventListener('scroll', () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById("progress-bar").style.width = scrolled + "%";
-        });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-        // Scroll Reveal Observer
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-        // Metadata Typing Logic
-        const typeLines = () => {
-            const lines = ['line-1', 'line-2', 'line-3', 'line-4', 'line-5'];
-            lines.forEach((id, index) => {
+    // Safe typing logic
+    const typeLines = () => {
+        const lines = ['line-1', 'line-2', 'line-3', 'line-4', 'line-5'];
+        lines.forEach((id, index) => {
+            const el = document.getElementById(id);
+            if (el) {
                 setTimeout(() => {
-                    document.getElementById(id).classList.add('animate');
+                    el.classList.add('animate');
                 }, (index * 400) + 1000);
-            });
-        };
+            }
+        });
+    };
 
-        window.addEventListener('load', typeLines);
+    typeLines();
 
-        // Formspree Integration Logic
-        const form = document.getElementById('contact-form');
+    // Formspree Integration Logic
+    const form = document.getElementById('contact-form');
+    if (form) {
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
             const btn = this.querySelector('button span');
@@ -397,7 +410,7 @@
             btn.innerText = "Transmitting Signal...";
 
             const formData = new FormData(form);
-            
+
             try {
                 const response = await fetch(form.action, {
                     method: 'POST',
@@ -414,7 +427,9 @@
                             <button onclick="location.reload()" class="mt-8 text-indigo-400 text-[10px] uppercase font-bold tracking-widest hover:text-white transition-all underline decoration-1">Send New Signal</button>
                         </div>
                     `;
-                    lucide.createIcons();
+                    if (window.lucide) {
+                        lucide.createIcons();
+                    }
                 } else {
                     btn.innerText = "Error: Check Endpoint";
                     setTimeout(() => btn.innerText = originalText, 2000);
@@ -424,6 +439,8 @@
                 setTimeout(() => btn.innerText = originalText, 2000);
             }
         });
-    </script>
+    }
+});
+</script>
 </body>
 </html>
